@@ -1,5 +1,5 @@
 const express = require('express');
-
+const actionRoutes = require('./actionRoutes');
 const projectModel = require('../data/helpers/projectModel');
 
 const router = express.Router();
@@ -68,5 +68,17 @@ router.delete('./:id', (req, res, next) => {
         })
         .catch(error => {res.status(500).json({ error: 'An error has occurred.' })})
 })
+
+// GET ID Actions
+
+router.get('/:id/actions', (req, res, next) => {
+    const { id } = req.params;
+    projectModel
+        .getProjectActions(id)
+        .then(actions => {res.json(actions)})
+        .catch(error => {res.status(500).json({ error: 'An Error has occurred.' })})
+})
+
+router.use('/:id/actions', actionRoutes);
 
 module.exports = router;
