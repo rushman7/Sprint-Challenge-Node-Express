@@ -41,7 +41,7 @@ router.post('/', (req, res, next) => {
 
 // PUT Project
 
-router.put('./:id', (req, res, next) => {
+router.put('/:id', (req, res, next) => {
     const { id } = req.params;
     const update = req.body;
     projectModel
@@ -56,7 +56,7 @@ router.put('./:id', (req, res, next) => {
 
 // DELETE Project
 
-router.delete('./:id', (req, res, next) => {
+router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
     projectModel
         .remove(id)

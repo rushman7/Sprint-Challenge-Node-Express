@@ -6,6 +6,17 @@ const router = express.Router();
 
 // GET Action
 
+router.get('/', (req, res, next) => {
+    actionModel
+        .get()
+        .then(users => {res.json(users)})
+        .catch(error => {res.status(500).json({ error: 'Unable to retrieve project information!' })
+    })
+})
+
+
+// GET Action Id
+
 router.get('/:id', (req, res, next) => {
     const { id } = req.params;
     actionModel
@@ -44,6 +55,8 @@ router.put('/:id', (req, res, next) => {
         })
         .catch(error => {res.status(500).json({ error: 'An error occurred.' })})
 })
+
+// DELETE action
 
 router.delete('/:id', (req, res, next) => {
     const { id } = req.params;
