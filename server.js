@@ -3,12 +3,12 @@ const projectModel = require('./data/helpers/projectModel');
 
 // Routes
 // const actionRoutes = require('./routes/actionRoutes');
-// const projectRoutes = require('./routes/projectRoutes');
+const projectRoutes = require('./routes/projectRoutes');
 
 const express = require('express');
 const server = express();
 
-errorHandler = (err, req, res, next) => { // error handler middleware to stop all errors
+errorHandler = (error, req, res, next) => { // error handler middleware to stop all errors
     if (error){
         if (error.errno) {
             res.status(400).json({ message: 'Please provide all the required information!' });
@@ -20,7 +20,7 @@ errorHandler = (err, req, res, next) => { // error handler middleware to stop al
 
 server.use(express.json());
 
-// server.use('/api/projects', projectRoutes);
+server.use('/api/projects', projectRoutes);
 
 server.use(errorHandler);
 
