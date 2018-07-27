@@ -28,9 +28,11 @@ router.get('/:id', (req, res, next) => {
 // POST Project
 
 router.post('/', (req, res, next) => {
-    const userId = req.body;
+    const { name } = req.body;
+    const pModel = { name }
+    if (name.length > 128) return res.status(400).json({ error: 'Name is too long!' });
     projectModel
-        .insert(userId) 
+        .insert(pModel) 
         .then(response => { 
             projectModel
                 .get()

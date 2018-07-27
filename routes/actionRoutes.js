@@ -28,9 +28,11 @@ router.get('/:id', (req, res, next) => {
 // POST Action
 
 router.post('/', (req, res, next) => {
-    const userId = req.body;
+    const { project_id, description } = req.body;
+    const aModel = { project_id, description }
+    if (description.length > 128) return res.status(400).json({ error: 'Name is too long!' });
     actionModel
-        .insert(userId)
+        .insert(aModel)
         .then(response => {
             actionModel
                 .get()
